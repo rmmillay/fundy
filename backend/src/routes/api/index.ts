@@ -7,10 +7,12 @@ import db from '../../db/models';
 //imports from router files
 import userRouter from './users';
 import sessionRouter from './session';
+// import fundraiserRouter from './fundraisers';
+// import donationRouter from './donations';
 import { ForbiddenError, NoResourceError, UnauthorizedError } from "../../errors/customErrors";
 import csurf from "csurf";
 
-const{User, SpotImage, ReviewImage, Review, Spot} = db;
+const{User, Session, fundraiser, donation} = db;
 const router = require('express').Router();
 const { environment } = require('../../config');
 const isProduction = environment === 'production';
@@ -28,8 +30,8 @@ router.use(
 );
 router.use('/session', sessionRouter);
 router.use('/users', userRouter);
-
-
+// router.use('/fundraisers', fundraiserRouter);
+// router.use('/donations', donationRouter);
 
 router.get(
     '/restore-user',
