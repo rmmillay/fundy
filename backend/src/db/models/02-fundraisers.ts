@@ -7,7 +7,7 @@ type FundraiserAttributes = {
     ownerId: number,
     fundName: string,
     description: string,
-    goal: number,
+    goal: number, 
     goalProgress: number,
 };
 
@@ -43,6 +43,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         // declare public static associations: { [key: string]: Association<Model<any, any>, Model<any, any>>; };
 
     }
+
     Fundraiser.init(
         {
             id: {
@@ -85,7 +86,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
                 type: DataTypes.DECIMAL,
                 allowNull: false,
             }
-
 
         },
         

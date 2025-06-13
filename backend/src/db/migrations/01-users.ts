@@ -6,7 +6,7 @@ let options:OptionsInterface = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
-
+ 
 module.exports = {
   up: async (queryInterface:any, Sequelize:any) => {
     return queryInterface.createTable("Users", {

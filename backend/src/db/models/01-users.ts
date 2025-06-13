@@ -1,4 +1,7 @@
-import { Association, CreationOptional, DataTypes, Model, Optional } from 'sequelize';
+import { Association, ForeignKey, CreationOptional, DataTypes, ForeignKeyConstraintError, HasMany, ManyToManyOptions, Model, Optional } from 'sequelize';
+import { post } from '../../app';
+import './02-fundraisers';
+
 
 const { Validator } = require('sequelize');
 
@@ -36,12 +39,53 @@ module.exports = (sequelize: any, DataTypes: any) => {
             return safeUser
         }
 
+
+
         static associate(models: any) {
             // Associations go here
-        }
-        // declare public static associations: { [key: string]: Association<Model<any, any>, Model<any, any>>; };
+            //}
+            // declare public static associations: { [key: string]: Association<Model<any, any>, Model<any, any>>; };
+
+            User.hasMany(models.fundraisers, {
+                sourceKey: 'id',
+                foreignKey: 'ownerId',
+            });
+            models.fundraisers.belongsTo(User, { targetKey: 'id' });
+            
+            User.hasMany(models.donations, {
+                sourceKey: 'id',
+                foreignKey: 'ownerId',
+            });
+            models.donations.belongsTo(User, { targetKey: 'id' });
+
+
+        };
+
+        // User.hasMany(models.Spot, {
+        //     foreignKey: 'ownerId',
+        //     as: 'Owner',
+        //     onDelete: "CASCADE",
+        //     hooks: true
+        // });
+
+        // User.hasMany(models.Review, {
+        //     foreignKey: "userId",
+        //     onDelete: "CASCADE",
+        //     hooks: true
+        // });
+
+        // User.hasMany(models.Booking, {
+        //     foreignKey: "userId",
+        //     onDelete: "CASCADE",
+        //     hooks: true
+        // });
 
     }
+
+
+
+
+
     User.init(
         {
             id: {
